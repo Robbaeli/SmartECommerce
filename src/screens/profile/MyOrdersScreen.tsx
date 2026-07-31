@@ -5,7 +5,6 @@ import OrderItem from "../../components/cart/OrderItem";
 import AppSafeView from "../../components/views/AppSaveView";
 
 const MyOrdersScreen = () => {
-  // Dummy data for rendering the component
   const orderData = [
     {
       id: 1,

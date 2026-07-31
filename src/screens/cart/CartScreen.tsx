@@ -1,44 +1,70 @@
-import { FlatList, StyleSheet, Text, View } from 'react-native'
-import React from 'react'
-import { useNavigation } from '@react-navigation/native';
-import AppSaveView from '../../components/views/AppSaveView'
-import HomeHeader from '../../components/headers/HomeHeader'
-import EmptyCart from './EmptyCart'
-import AppButton from '../../components/buttons/AppButton'
-import CartItem from '../../components/cart/CartItem'
-import TotalsView from '../../components/cart/TotalsView'
-import { products } from '../../data/products'
-import { sharedPaddingHorizontal } from '../../styles/sharedStyles'
+import { FlatList, StyleSheet, Text, View } from "react-native";
+import React from "react";
+import AppSaveView from "../../components/views/AppSaveView";
+import HomeHeader from "../../components/headers/HomeHeader";
+import EmptyCart from "./EmptyCart";
+import CartItem from "../../components/cart/CartItem";
+import TotalsView from "../../components/cart/TotalsView";
+import { products } from "../../data/products";
+import { sharedPaddingHorizontal } from "../../styles/sharedStyles";
+import AppButton from "../../components/buttons/AppButton";
+import { useNavigation } from "@react-navigation/native";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../store/store";
+import {
+  addItemsToCart,
+  removeItemFromCart,
+  removeProductFromCart,
+} from "../../store/reducers/cartSlice";
+import { shippingFee, taxes } from "../../constants/constants";
 
 const CartScreen = () => {
   const navigation = useNavigation();
+  const { items } = useSelector((state: RootState) => state.cartSlice);
+  const dispatch = useDispatch();
+  const totalProductsPricesSum = items.reduce((acc, item) => acc + item.sum, 0);
+  const orderTotal = totalProductsPricesSum + shippingFee + taxes;
+  console.log(items);
+
   return (
     <AppSaveView>
       <HomeHeader />
-      {/* <EmptyCart /> */}
-      <View style={{ paddingHorizontal: sharedPaddingHorizontal, flex: 1 }}>
-      <FlatList
-      data = {products}
-      keyExtractor= {(item) => item.id.toString()}
-        renderItem = {({item}) => (
-           <CartItem
-             {...item}
-           />
-           
-       
 
-        )}
-         showsVerticalScrollIndicator={false}
-      />
-      <TotalsView itemsPrice={5000} orderTotal={5025} />
-        <AppButton title='Checkout' onPress={() => navigation.navigate('CheckoutScreen')} /> 
-      </View>
+      {items.length > 0 ? (
+        <View style={{ paddingHorizontal: sharedPaddingHorizontal, flex: 1 }}>
+          <FlatList
+            data={items}
+            keyExtractor={(item) => item.id.toString()}
+            renderItem={({ item }) => {
+              return (
+                <CartItem
+                  {...item}
+                  price={item.sum}
+                  onReducePress={() => dispatch(removeItemFromCart(item))}
+                  onDeletePress={() => dispatch(removeProductFromCart(item))}
+                  onIncreasePress={() => dispatch(addItemsToCart(item))}
+                />
+              );
+            }}
+            showsVerticalScrollIndicator={false}
+          />
+
+          <TotalsView
+            itemsPrice={totalProductsPricesSum}
+            orderTotal={orderTotal}
+          />
+          <AppButton
+            title="Continue"
+            onPress={() => navigation.navigate("CheckoutScreen")}
+          />
+        </View>
+      ) : (
+        <EmptyCart />
+      )}
     </AppSaveView>
-  )
-}
+  );
+};
 
-export default CartScreen
+export default CartScreen;
 
-const styles = StyleSheet.create({
-  
-})
+const styles = StyleSheet.create({});

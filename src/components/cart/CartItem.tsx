@@ -7,21 +7,27 @@ import { AppFonts } from "../../styles/fonts";
 import { AntDesign, FontAwesome } from "@expo/vector-icons";
 
 interface ICartItem {
+  id: number;
   title: string;
   price: number;
+  sum: number;
   imageURL: string;
-  quantity: number;
-  onIncreaseQuantity: () => void;
-  onDecreaseQuantity: () => void;
+  qty: number;
+  onIncreasePress: () => void;
+  onReducePress: () => void;
+  onDeletePress: () => void;
 }
 
 const CartItem: FC<ICartItem> = ({
+  id,
   title,
   price,
+  sum,
   imageURL,
-  quantity,
-  onIncreaseQuantity,
-  onDecreaseQuantity,
+  qty,
+  onIncreasePress,
+  onReducePress,
+  onDeletePress,
 }: ICartItem) => {
   return (
     <View style={styles.container}>
@@ -33,22 +39,22 @@ const CartItem: FC<ICartItem> = ({
       {/* Details Container */}
       <View style={styles.detailsContainer}>
         <AppText style={styles.textTitle}>{title}</AppText>
-        <AppText style={styles.textPrice}>{price}</AppText>
+        <AppText style={styles.textPrice}>{sum}</AppText>
 
         <View style={styles.qtyContainer}>
-          <Pressable style={styles.iconButton} onPress={onIncreaseQuantity}>
-            <FontAwesome name="plus" size={s(10)} color={AppColors.primary} />
-          </Pressable>
-          <AppText style={styles.textQty}>{quantity}</AppText>
-          <Pressable style={styles.iconButton} onPress={onDecreaseQuantity}>
+          <Pressable style={styles.iconButton} onPress={onReducePress}>
             <FontAwesome name="minus" size={s(10)} color={AppColors.primary} />
+          </Pressable>
+          <AppText style={styles.textQty}>{qty}</AppText>
+          <Pressable style={styles.iconButton} onPress={onIncreasePress}>
+            <FontAwesome name="plus" size={s(10)} color={AppColors.primary} />
           </Pressable>
         </View>
       </View>
 
       {/* Delete Button Container */}
       <View style={styles.deleteContainer}>
-        <Pressable style={styles.deleteButton}>
+        <Pressable style={styles.deleteButton} onPress={onDeletePress}>
           <AntDesign name="delete" size={s(14)} color={"red"} />
           <AppText style={styles.deleteText}>Delete</AppText>
         </Pressable>
