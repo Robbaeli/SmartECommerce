@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View } from "react-native";
-import React from "react";
+import React, { useEffect } from "react";
 import { s, vs } from "react-native-size-matters";
 import AppSaveView from "../../components/views/AppSaveView";
 import HomeHeader from "../../components/headers/HomeHeader";
@@ -9,9 +9,21 @@ import { FlatList } from "react-native-gesture-handler";
 import { products } from "../../data/products";
 import { useDispatch } from "react-redux";
 import { addItemsToCart } from "../../store/reducers/cartSlice";
+import { getProductsData } from "../../config/dataServices";
 
 const HomeScreen = () => {
   const dispatch = useDispatch();
+  const [products, setProducts] = React.useState([]);
+
+const fetchProducts = async () => {
+  const data = await getProductsData();
+  setProducts(data);
+};
+
+useEffect(() => {
+  fetchProducts();
+}, []);
+
   return (
     <AppSaveView>
       <HomeHeader />

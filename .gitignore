@@ -27,6 +27,9 @@ yarn-error.log
 # Env
 .envrc.local
 
+# Firebase credentials
+src/config/firebase.ts
+
 # Emacs
 *~
 
