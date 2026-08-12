@@ -13,7 +13,7 @@ import { getProductsData } from "../../config/dataServices";
 
 const HomeScreen = () => {
   const dispatch = useDispatch();
-  const [products, setProducts] = React.useState([]);
+  const [products, setProducts] = React.useState<any[]>([]);
 
 const fetchProducts = async () => {
   const data = await getProductsData();

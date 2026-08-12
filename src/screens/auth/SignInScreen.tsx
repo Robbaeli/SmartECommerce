@@ -42,7 +42,7 @@ const SignInScreen = () => {
     resolver: yupResolver(schema),
   });
 
-  const navigation = useNavigation();
+  const navigation = useNavigation<any>();
 
   const dispatch = useDispatch();
 
@@ -55,8 +55,16 @@ const SignInScreen = () => {
         data.password
       );
       navigation.navigate("MainAppBottomTabs");
+
+const userDataObj = {
+        uid: userCredential.user.uid,
+      
+      };
+
       dispatch(setUserData({ uid: userCredential.user.uid, email: userCredential.user.email }))
-    
+      
+
+
     } catch (error) {
       let errorMessage =""
       console.log((error as any).code);

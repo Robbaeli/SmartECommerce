@@ -9,7 +9,7 @@ interface OrderItemProps {
   date: string;
   style?: object;
   totalAmount: number;
-  totalPrice: string;
+  totalPrice: number;
 }
 
 const OrderItem: React.FC<OrderItemProps> = ({
@@ -24,14 +24,14 @@ const OrderItem: React.FC<OrderItemProps> = ({
       <View style={styles.divider} />
       <View style={styles.summaryContainer}>
         <View>
-          <AppText>Total Price: {totalPrice}</AppText>
+          <AppText>Total Price: {totalPrice?.toFixed(2)} $</AppText>
           <AppText>Date: {date}</AppText>
         </View>
         <View style={styles.amountContainer}>
           <AppText style={styles.totalAmount}>
             {Math.abs(totalAmount).toFixed(2)} $
           </AppText>
-          <AppText style={styles.date}>{date}</AppText>
+          
         </View>
       </View>
     </View>

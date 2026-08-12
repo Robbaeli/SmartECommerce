@@ -7,24 +7,30 @@ import { sharedPaddingHorizontal } from "../../styles/sharedStyles";
 import AppText from "../../components/texts/AppText";
 import { s, vs } from "react-native-size-matters";
 import { useNavigation } from "@react-navigation/native";
+import { useDispatch } from "react-redux";
+import { clearUserData } from "../../store/reducers/userSlice";
 
 const ProfileScreen = () => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<any>();
+  const dispatch = useDispatch();
+
+  const handleLogout = () => {
+    dispatch(clearUserData())
+    navigation.navigate("AuthStack")
+  }
   
   return (
     <AppSaveView>
       <HomeHeader />
-      <AppText variant="Bold" style={{ fontSize: s(18), marginTop: vs(10) }}>
-        Hello, Ahmed
-      </AppText>
+
       <View style={{ paddingHorizontal: sharedPaddingHorizontal }}>
         <ProfileSectionButton
           title={"My Orders"}
           onPress={() => navigation.navigate("MyOrdersScreen")}
         />
-        <ProfileSectionButton title={"Language"} />
-        <ProfileSectionButton title={"Logout"}/>
+        <ProfileSectionButton title={"Logout"} onPress={handleLogout}/>
       </View>
+
     </AppSaveView>
   );
 };

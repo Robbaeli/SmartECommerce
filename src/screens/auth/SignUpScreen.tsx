@@ -41,7 +41,7 @@ const SignUpScreen = () => {
     resolver: yupResolver(schema),
   });
 
-  const navigation = useNavigation()
+  const navigation = useNavigation<any>();
   const dispatch = useDispatch()
 
   const onSignUpPress = async (data: FormData) => {
@@ -54,7 +54,12 @@ const SignUpScreen = () => {
 
     Alert.alert("User Created");
     navigation.navigate("MainAppBottomTabs");
-    dispatch(setUserData({ uid: usercredential.user.uid, email: usercredential.user.email }));
+
+    
+    const userDataObj = {
+      uid: usercredential.user.uid,
+    }
+    dispatch(setUserData(userDataObj));
 
   } catch (error: any) {
     let errorMessage = ""

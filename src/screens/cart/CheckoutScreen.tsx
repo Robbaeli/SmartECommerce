@@ -76,8 +76,12 @@ const CheckoutScreen = () => {
         totalPrice,
         
       }
-      const userOrderRef = collection(doc(db, "users", userData.uid!), "orders")
-      const orderRef = await addDoc(userOrderRef, orderBody)
+      const userOrderRef = collection(doc(db, "users", userData!.uid!), "orders")
+      await addDoc(userOrderRef, orderBody)
+
+      const ordersRef = collection(db, "orders");
+      await addDoc(ordersRef, orderBody);
+
      showMessage({type: "success", message: "Order saved successfully!"})
       navigation.goBack()
       dispatch(emptycart())

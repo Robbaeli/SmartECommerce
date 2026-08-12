@@ -7,7 +7,8 @@ import { StyleSheet, ActivityIndicator } from 'react-native';
 import MainAppStack from './src/navigation/MainAppStack';
 import { useFonts } from 'expo-font';
 import { Provider } from 'react-redux';
-import store from './src/store/store';
+import store, { persistor } from './src/store/store';
+import { PersistGate } from 'redux-persist/lib/integration/react';
 
 export default function App() {
 
@@ -24,12 +25,13 @@ export default function App() {
   return (
     <>
     <Provider store={store}>
-      <NavigationContainer>
-      <FlashMessage position={"top"}/>
-      <MainAppStack />
-    </NavigationContainer>
+      <PersistGate loading={<ActivityIndicator size={"large"}/>} persistor={persistor}>
+        <NavigationContainer>
+          <FlashMessage position={"top"}/>
+          <MainAppStack />
+        </NavigationContainer>
+      </PersistGate>
     </Provider>
-    
     </>
   );
 }

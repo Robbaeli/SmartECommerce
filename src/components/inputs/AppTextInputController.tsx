@@ -11,7 +11,7 @@ interface AppTextInputControllerProps<T extends FieldValues> {
   name: Path<T>;
   rules?: object;
   placeholder?: string;
-  secureTextEntry: boolean;
+  secureTextEntry?: boolean;
   keyboardType?: "default" | "email-address" | "numeric" | "phone-pad";
 }
 
