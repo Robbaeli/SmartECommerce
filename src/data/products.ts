@@ -29,21 +29,21 @@ export const products = [
   },
   {
     id: 5,
-    price: 59,
+    price: 79,
     title: "Logitech Mouse",
     imageURL:
       "https://media.ldlc.com/r374/ld/products/00/05/88/25/LD0005882564_1.jpg",
   },
   {
     id: 6,
-    price: 99,
+    price: 120,
     title: "Logitech Headset",
     imageURL:
       "https://resource.logitech.com/b_white/content/dam/logitech/en/products/headsets/zone-900/gallery/logitech-zone-900-gallery-1.png",
   },
   {
     id: 7,
-    price: 80,
+    price: 49,
     title: "Logitech Camera ",
     imageURL: "https://resource.logitech.com/content/dam/logitech/en/products/webcams/c310/gallery/c310-gallery-1.png",
   },
