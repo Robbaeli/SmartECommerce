@@ -9,7 +9,6 @@ import type { RootState } from "../../store";
 import { getDateFromFireStoreTimeStampObject } from "../../helpers/dateTimeHelper";
 
 const MyOrdersScreen = () => {
-  // Dummy data for rendering the component
   const orderData = [
     {
       id: 1,

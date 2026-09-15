@@ -43,7 +43,7 @@ export const products = [
   },
   {
     id: 7,
-    price: 79,
+    price: 80,
     title: "Logitech Camera ",
     imageURL: "https://resource.logitech.com/content/dam/logitech/en/products/webcams/c310/gallery/c310-gallery-1.png",
   },

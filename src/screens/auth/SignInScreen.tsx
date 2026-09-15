@@ -10,7 +10,6 @@ import AppButton from "../../components/buttons/AppButton";
 import { AppColors } from "../../styles/colors";
 import { useNavigation } from "@react-navigation/native";
 
-// 1- Form Controller Imports
 import AppTextInputController from "../../components/inputs/AppTextInputController";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
@@ -33,11 +32,9 @@ const schema = yup
   })
   .required();
 
-// 3- Define the type
 type FormData = yup.InferType<typeof schema>;
 
 const SignInScreen = () => {
-  // 4- init the useForm hook
   const { control, handleSubmit } = useForm<FormData>({
     resolver: yupResolver(schema),
   });

@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
   row: {
     flexDirection: "row",
     justifyContent: "space-between",
-    marginBottom: vs(10),
+    marginBottom: vs(9),
   },
   textTitle: {
     fontSize: s(16),
